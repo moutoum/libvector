@@ -5,7 +5,7 @@
 ** Login   <maxence.moutoussamy@epitech.eu>
 **
 ** Started on  Fri May  5 18:22:38 2017 moutoum
-** Last update Sat Nov  4 11:08:01 2017 Maxence Moutoussamy
+** Last update Sun Nov 12 22:14:51 2017 Maxence Moutoussamy
 */
 
 #ifndef VECTOR_H_
@@ -17,37 +17,47 @@
 #include <string.h>
 
 # define VECTOR_ALLOCATION_INIT 1024
+# define FOREACH(item, vector) for (item = vector_begin(vector); item != vector_end(vector); item++)
 
-struct s_vector
+typedef struct s_vector
 {
   void 	        *data;
   size_t 	esize;
   size_t 	nsize;
   size_t 	nsize_alloc;
-};
+} vector_t;
 
-int 	vector_init(struct s_vector *v, size_t esize);
-int	vector_delete(struct s_vector *);
+typedef enum e_vector_error {
+        VE_OK = 1,
+        VE_INDEX_OUT_OF_RANGE = 2,
+        VE_INVALID_VECTOR = 3,
+        VE_INVALID_ITEM_POINTER = 4
+} vector_error_t;
 
-size_t 	vector_size(const struct s_vector *v);
-int	vector_clear(struct s_vector *v);
+int 	vector_init(vector_t * const v, size_t esize);
+int	vector_delete(vector_t *);
 
-int	vector_push_back(struct s_vector *v, const void *data);
-int	vector_push_front(struct s_vector *v, const void *data);
+size_t 	vector_size(const vector_t *v);
+int	vector_clear(vector_t *v);
+
+int	vector_push_back(vector_t *v, const void *data);
+int	vector_push_front(vector_t *v, const void *data);
 
 # define ITERATOR(type) type*
 
-void	*vector_begin(const struct s_vector *v);
-void	*vector_end(const struct s_vector *v);
-void	*vector_incr(const struct s_vector *v, void *it);
+void	*vector_begin(const vector_t *v);
+void	*vector_end(const vector_t *v);
+void	*vector_incr(const vector_t *v, void *it);
 
-int	vector_pop_back(struct s_vector *v, void *buffer);
-int	vector_pop_front(struct s_vector *v, void *buffer);
-int	vector_remove(struct s_vector *v, void *iterator);
+int	vector_pop_back(vector_t *v, void *buffer);
+int	vector_pop_front(vector_t *v, void *buffer);
+int	vector_remove(vector_t *v, void *iterator);
 
-void    *vector_get_by_idx(const struct s_vector * const v, size_t idx);
+void    *vector_get_by_idx(const vector_t * const v, size_t idx);
 
-int	vector_qsort(struct s_vector *v,
+int	vector_qsort(vector_t *v,
 		     int (*compar)(const void *, const void *));
+
+char *vector_strerror(void);
 
 #endif
