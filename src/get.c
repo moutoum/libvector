@@ -5,16 +5,12 @@
 ** Login   <moutou_m@epitech.eu>
 **
 ** Started on  Sun Jun 25 07:51:13 2017 Maxence Moutoussamy
-** Last update Mon Nov 13 12:33:16 2017 Maxence Moutoussamy
+** Last update Mon Nov 13 18:26:39 2017 Maxence Moutoussamy
 */
 
 #include "vector.h"
 
 extern vector_error_t verrno;
-
-void    *vector_get_by_idx(const struct s_vector * const v, size_t idx) {
-        return (v->data + (idx * v->esize));
-}
 
 int vector_get_last(vector_t * const v, void * const buffer) {
         if (!v || !v->data) {

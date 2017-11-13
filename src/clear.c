@@ -1,17 +1,24 @@
 /*
 ** clear.c for  in /home/moutou_m/c/PSU_2016_ftrace/lib/libvector/src
-** 
+**
 ** Made by moutoum
 ** Login   <maxence.moutoussamy@epitech.eu>
-** 
+**
 ** Started on  Fri May  5 10:52:19 2017 moutoum
-** Last update Fri May  5 10:52:35 2017 moutoum
+** Last update Mon Nov 13 18:15:30 2017 Maxence Moutoussamy
 */
 
 #include "vector.h"
 
-int	vector_clear(struct s_vector *v)
+extern vector_error_t verrno;
+
+int	vector_clear(vector_t * const v)
 {
-  v->nsize = 0;
-  return (EXIT_SUCCESS);
+        if (!v) {
+                verrno = VE_INVALID_VECTOR;
+                return (-1);
+        }
+
+        v->nsize = 0;
+        return (0);
 }
