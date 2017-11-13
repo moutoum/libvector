@@ -5,7 +5,7 @@
 ** Login   <moutou_m@epitech.eu>
 **
 ** Started on  Sun Nov 12 22:04:19 2017 Maxence Moutoussamy
-** Last update Sun Nov 12 22:16:16 2017 Maxence Moutoussamy
+** Last update Mon Nov 13 12:10:00 2017 Maxence Moutoussamy
 */
 #include "vector.h"
 
@@ -15,7 +15,10 @@ static char const * const _str_verrno_tab[] = {
         "Everything is OK",
         "The index is out of range",
         "The vector is invalid",
-        "The pointer provided is invalid"
+        "The pointer provided is invalid",
+        "The allocation failed",
+        "The element size must be superior to zero",
+        "The vector is empty: invalid action"
 };
 
 char * vector_strerror(void) {

@@ -5,28 +5,47 @@
 ** Login   <maxence.moutoussamy@epitech.eu>
 **
 ** Started on  Fri May  5 10:52:54 2017 moutoum
-** Last update Fri Jun  2 15:20:46 2017 Maxence Moutoussamy
+** Last update Mon Nov 13 12:45:39 2017 Maxence Moutoussamy
 */
 
 #include "vector.h"
 
-int vector_pop_back(struct s_vector *v, void *buffer)
+extern vector_error_t verrno;
+
+int vector_pop_back(vector_t * const v)
 {
-	if (!v->nsize)
-		return (EXIT_FAILURE);
-	if (buffer)
-		memcpy(buffer, v->data + (v->esize * (v->nsize - 1)), v->esize);
+	if (!v || !v->data) {
+		verrno = VE_INVALID_VECTOR;
+		return (-1);
+	}
+
+	if (!v->nsize) {
+		verrno = VE_VECTOR_IS_EMPTY;
+		return (-1);
+	}
+
 	v->nsize -= 1;
-	return (EXIT_SUCCESS);
+
+	verrno = VE_OK;
+	return (0);
 }
 
-int vector_pop_front(struct s_vector *v, void *buffer)
+int vector_pop_front(vector_t * const v)
 {
-	if (!v->nsize)
-		return (EXIT_FAILURE);
-	if (buffer)
-		memcpy(buffer, v->data, v->esize);
-	memmove(v->data, v->data + v->esize, v->esize);
+	if (!v || v->data) {
+		verrno = VE_INVALID_VECTOR;
+		return (-1);
+	}
+
+	if (!v->nsize) {
+		verrno = VE_VECTOR_IS_EMPTY;
+		return (-1);
+	}
+
+	memmove(v->data,
+		v->data + v->esize,
+		v->esize * (v->nsize - 1));
 	v->nsize -= 1;
-	return (EXIT_SUCCESS);
+	verrno = VE_OK;
+	return (0);
 }
